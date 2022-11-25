@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<title>Prueba de Handle Bar</title>
+<head>
+    <Nav>
+        <a href="index.html">Home</a>
+        <a href="maptest.html">Map</a>
+    </Nav>
+</head>
+<body>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <h1>Welcome to Socket practice with HandleBars</h1>
+    <hr>
+
+    <p>
+        Server Status:
+        <span id= "lblOnline" class="text-success">Online</span>
+        <span id= "lblOffline" class="text-danger">Offline</span>
+    </p>
+
+    <div id="action"></div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <input type="text" id="txtMensaje" class="form-control">
+        </div>
+        <div class="col">
+            <button id="btnEnviar" class="btn btn-primary">
+                Enviar
+            </button>
+        </div>
+    </div>
+    <script type="text/x-handlebars-template" id="index">
+        <lu>
+            {{#each autor}}
+                {{#if active}}
+                <li>{{nombre}}, {{apellidos}} usuario actualmente activo - Saldo restante: {{saldo_restante saldo usodiario}}</li>
+                {{else}}
+                <li>{{nombre}}, {{apellidos}} usuario actualente inactivo</li>
+                {{/if}}
+            {{/each}}
+        </lu>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script type="text/javascript">
+
+        var template = document.getElementById('index').innerHTML;
+
+        console.log(template);
+
+        var compile = Handlebars.compile(template);
+
+        var data = {
+            autor:[{
+                    active: true,
+                    nombre: 'Jorge',
+                    apellidos: 'Perez',
+                    saldo: 25,
+                    usodiario: 15
+                },{
+                    active: true,
+                    nombre: 'Carlos',
+                    apellidos: 'Mendez',
+                    saldo: 25,
+                    usodiario: 10
+                },{
+                    active: false,
+                    nombre: 'Angie',
+                    apellidos: 'Larios',
+                    saldo: 25,
+                    usodiario: 05
+                }]
+        };
+
+        Handlebars.registerHelper('saldo_restante', function(saldo,uso){
+             return saldo - uso;
+        });
+
+        var compileHTML = compile(data);
+        
+        document.getElementById('action').innerHTML += compileHTML;
+    </script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="./js/socket-client.js"></script>
+</body> 
+<footer></footer>

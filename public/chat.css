@@ -1,0 +1,102 @@
+body{
+  background-color: #f4f7f6;
+  margin-top:20px;
+}
+.card {
+  background: #fff;
+  transition: .5s;
+  border: 0;
+  margin-bottom: 30px;
+  border-radius: .55rem;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+}
+.chat-app .chat {
+  margin-left: 280px;
+  border-left: 1px solid #eaeaea
+}
+.chat .chat-header {
+  padding: 15px 20px;
+  border-bottom: 2px solid #f4f7f6
+}
+.chat .chat-header img {
+  float: left;
+  border-radius: 40px;
+  width: 40px
+}
+.chat .chat-header .chat-about {
+    float: left;
+    padding-left: 10px
+}
+.chat .chat-history {
+  padding: 20px;
+  border-bottom: 2px solid #fff
+}
+.chat .chat-history ul {
+  padding: 0
+}
+.chat .chat-history ul li {
+  list-style: none;
+  margin-bottom: 30px
+}
+.chat .chat-history ul li:last-child {
+  margin-bottom: 0px
+}
+.chat .chat-history .message-data {
+  margin-bottom: 15px
+}
+.chat .chat-history .message-data img {
+  border-radius: 40px;
+  width: 40px
+}
+.chat .chat-history .message-data-time {
+  color: #434651;
+  padding-left: 6px;
+  margin-bottom: 5px;
+}
+.chat .chat-history .message {
+  color: #444;
+  padding: 18px 20px;
+  line-height: 26px;
+  font-size: 16px;
+  border-radius: 7px;
+}
+
+.chat .chat-history .my-message {
+  background: #efefef;
+  text-align: left;
+} 
+
+.chat .chat-history .other-message {
+  background: #e8f1f3;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.chat .chat-message {
+  padding: 20px
+}
+
+.float-right {
+    float: right
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0
+}
+.clearfix li ::marker{
+  list-style: none;
+}
+.text-right {
+  text-align: right!important;
+}
+
+#btnEnviar:hover{
+  background-color: rgb(0, 234, 255);
+
+}

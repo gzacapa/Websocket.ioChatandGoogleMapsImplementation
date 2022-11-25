@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chat.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to the chat room!!</h1>
+    <p>
+        Server Status:
+        <span id= "lblOnline" class="text-success">Online</span>
+        <span id= "lblOffline" class="text-danger">Offline</span>
+    </p>
+
+    <div class="container">
+        <div class="row clearfix">
+            <div class="card">
+                <div class="chat">
+                    <div class="chat-header clearflix">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a> <img src="/ProfilePics/profile2.jpg" alt="avatar"></a>
+                                <div class="chat-about">
+                                    <h6 class="m-b-0">Mantun-dev Chat Bot</h6>
+                                    <small>Last seen: 2 hours ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-history" id="chatHistory">
+                        
+                    </div>
+                    <div class="chat-message clearfix">
+                        <div class="input-group mb-0">
+                            <input type="text" class="form-control" placeholder="Ingrese su mensaje aqui..." id="txtMensaje" >
+                            <span class="input-group-text" id="btnEnviar"><i class="bi bi-send" ></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Imports HandleBars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script type="text/x-handlebars-template" id="message">
+            {{#each backload}}
+                {{#if emisor}}
+                <ul class="m-b-0">
+                    <li class="clearfix">
+                        <div class="message-data">
+                            <span class="message-date-time"> {{time}}, {{date}} <b>{{user}}</b></span>
+                            <img src="/ProfilePics/profile3.jpg" alt="avatar">
+                        </div>
+                        <div class="message other-message">
+                            {{message}}
+                        </div>
+                    </li>
+                    {{else}}
+                    <li class="clearfix">
+                        <div class="message-data text-right">
+                            <span class="message-data-time">{{time}}, {{date}} <b>{{user}}</b></span>
+                        </div>
+                        <div class="float-right message my-message"> {{{message}}}</div>
+                    </li>
+                </ul>
+                {{/if}}
+            {{/each}}
+    </script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="./js/socket-client.js"></script>
+    <!-- Imports SweetAlert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/sweetAlert.js"></script>
+    <script type="text/javascript">
+        
+        var template = document.getElementById('message').innerHTML;
+        var compile = Handlebars.compile(template);
+
+        var data = {
+            backload:[{
+                    emisor: true,
+                    date: 'Today',
+                    time: hour,
+                    message: 'Go ahead and send your first message!',
+                    user: 'Page Bot'
+                }]
+        };
+
+        var compileHTML = compile(data);
+
+        document.getElementById('chatHistory').innerHTML+= compileHTML
+        console.log('El render principal se termino')
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="maptest.css">
+    <title>map implementation </title>
+    <Nav>
+        <a href="index.html">Home</a>
+        <a href="maptest.html">Map</a>
+    </Nav>
+</head>
+<body>
+    <h1>Simple map integration 2</h1>
+
+    <div id="map"></div>
+
+    <script>
+        function initMap(){
+            let position = {lat: 15.559204, lng: -88.019805};
+            let label = "Soy yo";
+
+            const icon = "/icons/coding.png";
+
+            const contentString = '<div>'+
+                '<h4>Welcome To Mantun</h4>'+
+                '<p>To chat with a rep hit the icon below...</p>'+
+                '<a href="chat.html"> Chat</a>'+
+                "</div>";
+
+            const map = new google.maps.Map(document.getElementById("map"),{zoom: 18, center: position});
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: "Mantun Devs House" + contentString,
+                ariaLabel: "Dev Working",
+            });
+            
+            const markerView = new google.maps.Marker({map,position: position, title: "Aqui estoy",icon: icon});
+
+            markerView.addListener("click",()=>{
+                infoWindow.open({
+                    anchor: markerView,
+                    map
+                })
+            })
+        }
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNYrsUkg_77HVS1PfZnhweUS0O5540FPo&libraries=marker&callback=initMap&v=weekly"></script>
+</body>
+</html>
